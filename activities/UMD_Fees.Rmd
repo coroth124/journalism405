@@ -33,6 +33,10 @@ umd_fees_pct <- umd_fees |> mutate(pct_change = (`Fall 2026`- `Fall 2021`)/`Fall
 
 Write a few sentences about what you found in those percentages. What's the story here? What questions do you have?
 
+The smallest percent change is the Athletic fees which is interesting because everyone always complains that students are paying for athletics which seems to not be the case. But also if we are helping fund this why do our teams still suck? 
+
+The counseling center fees have an infinite number of percent change over the last five years. In 2021 the counseling center was not funded by student fees but over the past few years it has had a major jump in funding. This is probably due to the rise in mental health problems after and during COVID as the university had to start addressing the mental health crisis on campus. Students also are offered three free sessions at the counseling center so this makes sense why there is a jump in fees as it makes it easier to give each student free care. Is UMD having a mental health crisis? 
+
 
 
 
