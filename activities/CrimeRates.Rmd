@@ -48,7 +48,7 @@ crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/populat
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations? What might explain some of the results you found?
 
-There are more property crimes than violent crimes as shown through the violent crimes and property crimes rates. The years that had the highest violent crime rates were during COVID and post COVID. I am no suprised by this as more and more people were at home and bored due to the pandemic their mental health started to wain and their social skills went down. This can cause people to act more violently due to this lack of connection and people skills during and after this time. A lot of kids were not able to get the mental health they deserved as they grew up during COVID and were not able to work on their social skills making some result to violence as a way to express their feelings rather than using healthy communication skills. 
+There are more property crimes than violent crimes as shown through the violent crimes and property crimes rates. The years that had the highest violent crime rates were during the 1990s. I am not suprised by this as more parents were less likely to supervise their children during this time. There was also the big crack epidemic as well as other drugs which made people do things they would not normally do. I was very surpised that during the financial crisis of 2008 that violent crime rates went down significantly. 
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
