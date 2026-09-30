@@ -32,6 +32,7 @@ library(lubridate)  # For working with dates
 Load the accident data from our CSV file at https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv into a dataframe called `accidents`:
 
 ```{r load-data}
+accidents <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv")
 
 ```
 
@@ -68,7 +69,7 @@ ggplot(accidents, aes(x = date, y = total)) +
 ### Task 2 (3 points)
 Looking at the time series visualization above, identify at least two noticeable patterns or anomalies. What questions would you want to investigate further based on this initial view of the data? How might these visual patterns translate into potential story angles?
 
-ANSWER HERE
+A noticeable anomalie in this data set is that towards the beginning of 2020 there was a major drop in accidents. Is the drop in the number of car accidents correlated to the decrease in cars on the road due to the lockdown during the pandemic? The other thing that stands out to me is that there is a consistent or stable number of accidents from 2022 to 2024. I want to know if there were new safety codes or features added after COVID to make the number of accidents either decrease or become more stable. What were the post COVID road changes that has caused accidents to become more stable?
 
 The daily data is quite noisy, so let's also look at weekly patterns:
 
@@ -107,8 +108,7 @@ ggplot(accidents, aes(x = day_of_week, y = total)) +
 ### Task 3 (2 points)
 Based on the day-of-week analysis, which day(s) have the highest and lowest average accidents? Why might these patterns exist?
 
-ANSWER HERE
-
+Monday through Thursday have the lowest average number of accidents while Friday through Sunday have the highest average of accidents. This is probably due to the fact that there are more people on the road at night during the weekends and they are more likely to be potentially younger people or people that party or stay out late which can cause impaired driving leading to more accidents. 
 ## Calculating Z-Scores
 
 ### Task 4 (2 points)
@@ -119,9 +119,9 @@ Now, using the accidents dataframe, add three columns using `mutate()`: mean_acc
 # Calculate z-scores for total accidents
 accidents <- accidents |>
   mutate(
-    mean_accidents = REPLACE_ME,
-    sd_accidents = REPLACE_ME,
-    z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    mean_accidents = mean(total),
+    sd_accidents = sd(total),
+    z_score = (total - mean_accidents) / sd_accidents
   )
 
 # Display the data with z-scores
@@ -156,7 +156,7 @@ unusual_days |>
 ### Task 5 (3 points)
 Choose one of the top 10 unusual days and research what might have happened on that date. Look for weather events, holidays, major incidents, or other factors that could explain the unusual number of accidents. Briefly describe your findings and how you would incorporate this context into a story.
 
-ANSWER HERE
+When I looked up the weather in PG County on Oct. 29, 2021, I found that there were heavy gusts of wind, rainfall and flooding. This may have led to the high outlier of a z-score of 4.77. This was also Halloween weekend and therefore in PG County there is a large youth population that drinks or stays out late which could have caused more traffic and more imparied driving leading to more accidents. In the context of a story I would say that there are more accidents during Halloween weekend mixed with a day of significant storms. 
 
 Let's visualize these unusual days:
 
@@ -186,9 +186,9 @@ Let's calculate z-scores that account for day of week patterns based on the same
 accidents <- accidents |>
   group_by(day_of_week) |>
   mutate(
-    dow_mean = REPLACE_ME,
-    dow_sd = REPLACE_ME,
-    dow_z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    dow_mean = mean(total),
+    dow_sd = sd(total),
+    dow_z_score = (total - dow_mean) / dow_sd
   ) |>
   ungroup()
 
@@ -207,7 +207,7 @@ unusual_dow |>
 ### Task 7 (3 points)
 Compare the days that have extreme z-scores overall versus those with extreme day-of-week z-scores. How do these lists differ? What journalistic insights can you draw from comparing these two different approaches to measuring "unusual" days?
 
-ANSWER HERE
+The z-scores for the extreme overall is more skewed and focuses on specifically Friday, Saturday, and Sunday. While the z-scores of the extreme day-of-week data is a little less skewed towards 3.33 and includes a more diversified days of the week rather than just the weekend. I can draw the conclusion that the z-scores of the extreme day of the week data is more representative of the total because it has more variety and is less concentrated in 3.33 z-score and it is closer to the mean. 
 
 Let's see how many unusual days we have for each day of the week:
 
@@ -286,7 +286,7 @@ unusual_monthly |>
 ### Task 8 (2 points)
 Based on the monthly pattern analysis, which months have the highest and lowest average accidents? Develop a hypothesis about why these seasonal patterns exist.
 
-ANSWER HERE
+The months with the highest accidents are May and October. This could be due to Halloween festivities and the end of the school year being in May causing more impaired driving and late nights for younger drivers. The lowest is in January as it is extremely cold and less people are to go outside and drive their cars leading to less accidents. 
 
 ## Identifying Extreme Outliers
 
@@ -311,9 +311,13 @@ if(nrow(extreme_outliers) > 0) {
 ### Task 9 (2 points)
 For the extreme outliers identified (z-scores beyond ±3), what do they have in common?
 
-ANSWER HERE
+The extreme outliers with z-scores beyond plus or minus 3 all had accidents occuring on a weekend (friday, Saturday, or Sunday).
 
 ## Your Best Story Pitch
-
+Since Halloween Weekend has the worst number of car accidents I would like to investigate why this is the case and what can PG county do to prevent them. I would talk to PG county police, politicians, people who have been in accidents during that weekend previously and doctors to see what they think professionally is the right precaution for police and people to take while celebrating. 
 ### Task 10 (5 points)
 Based on all the analyses performed, craft your best story pitch, including a headline and lede. Be sure to include what kinds of sources/people you'd talk to for the story.
+
+Headline: Is the deadliest day for drivers Oct. 29th? 
+
+The famed Halloweekend has the highest number of car accidents in Prince George's County with 58 total accidents occuring on Oct. 29, 2021 according to Price George's County Police data.  
