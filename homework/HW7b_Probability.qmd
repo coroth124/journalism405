@@ -9,6 +9,8 @@ In this assignment, you'll build on your z-score skills to answer probability qu
 Load the tidyverse and the White House salaries data from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/white_house_salaries_2025.csv into a dataframe called `wh_salaries`
 
 ```{r}
+library(tidyverse)
+wh_salaries <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/white_house_salaries_2025.csv")
 ```
 
 ### Task 2: Filter and summarize (2 points)
@@ -17,7 +19,9 @@ You may remember from HW3 that some White House staffers have a salary of $0. Le
 
 ```{r}
 wh_paid <- wh_salaries |>
-  filter(SALARY > 0)
+  filter(SALARY > 0) 
+
+wh_paid |> mutate(mean_wh_paid = mean(SALARY), sd_wh_paid = sd(SALARY))
 
 
 
@@ -26,11 +30,17 @@ wh_paid <- wh_salaries |>
 Now create a histogram of the paid salaries with a vertical line for the mean and two more for ±1 standard deviation, similar to what you did in HW6 with Spotify data.
 
 ```{r}
+wh_paid |> 
+  ggplot() + 
+  geom_histogram(aes(x = SALARY), binwidth = 50000) +
+  geom_vline(aes(xintercept = mean(SALARY)), color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(aes(xintercept = mean(SALARY) - sd(SALARY)), color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(aes(xintercept = mean(SALARY) + sd(SALARY)), color = "blue", linetype = "dashed", linewidth = 1)
 ```
 
 **Describe the shape of the distribution. Is it roughly normal? Skewed? Where do most salaries cluster?**
 
-ANSWER HERE
+This distribution is skewed to the right as most of the large data points are clustered on the left. 
 
 ### Task 3: The Empirical Rule (3 points)
 
@@ -64,7 +74,7 @@ empirical
 
 **How closely does the data follow the empirical rule? What does any deviation tell you about the distribution?**
 
-ANSWER HERE
+Each percentage is a bit off where within one standard deviation is about 2% away from 68%, within two is about 3% away from 95%, and within 3 is 0.3% away from 99.7%. The deviation tells us whether the distribution is normal or if it is slightly skewed. 
 
 ### Task 4: From z-scores to probability with pnorm() (4 points)
 
@@ -73,7 +83,7 @@ Remember the car thefts z-score activity from class? Well, I want to return to t
 Re-run all of the blocks in CarTheftZScores notebook, including the code you just pasted in. What's happening there is you are using a function called `pnorm()` to find the probability of a value being less than or equal to a certain z-score. The basic formula to find that probability is:
 
 ```
-1 - pnorm(z_score)
+1 - pnorm(z_score) 
 ```
 
 Where `z_score` is one row's z-score. Now apply the same approach to salaries.
@@ -102,8 +112,7 @@ actual_prob
 
 **Write a sentence describing this probability in plain English. How does the normal approximation (prob_less) compare to the actual percentage?**
 
-ANSWER HERE
-
+The normal approximation tells us what a close estimate of the percentages are, while the actual percentages give us the real numbers for the data. The estimate uses the empirical rule to try and make sense of the data and make it easier to interpret without giving the exact numbers.
 ### Task 5: Probability between two values (3 points)
 
 Now your editor asks: **"What percentage of White House employees make between $80,000 and $120,000?"**
@@ -112,21 +121,21 @@ You'll need to calculate z-scores for those two figures, use `pnorm()` for each,
 
 ```{r}
 
-z_lower <- (REPLACE_ME - mean_sal) / sd_sal
-z_upper <- (REPLACE_ME - mean_sal) / sd_sal
+z_lower <- (80000 - mean_sal) / sd_sal
+z_upper <- (120000 - mean_sal) / sd_sal
 
 prob_between <- pnorm(z_upper) - pnorm(z_lower)
 prob_between
 
 # Verify with actual data
-actual_between <- sum(wh_paid$SALARY >= REPLACE_ME & wh_paid$SALARY <= REPLACE_ME) / total_n
+actual_between <- sum(wh_paid$SALARY >= 80000 & wh_paid$SALARY <= 120000) / total_n
 actual_between
 
 ```
 
 **Interpret this result. What does this "middle range" tell us about the White House salary structure?**
 
-ANSWER HERE
+This tells me that there are less employees making money in the "middle range" than there should be. This means that there are either too many employees earning too much or not enough on their salary.
 
 ### Task 6: Expected vs. observed (3 points)
 
@@ -158,7 +167,7 @@ bins |> select(category, expected_count, observed_count, difference)
 
 **Where does reality differ most from what the normal distribution predicts? What might explain those differences?**
 
-ANSWER HERE
+The biggest difference from reality and the normal distribution predicts is that for those that that make between 60 and 90 thousand dollars the expected amount of money was a difference of 73. This means that there were 73 people in this range making this much money than originally projected in the normal distribution. This also means that there are less people that are making less than 60 thousand than the normal distribution originally predicted. The thing that may explain that difference is that we did not factor in bonuses or other pay bumps that may have occurred during the year or it may have been because of the furlough of government workers that then brings their salaries up rather than what it seemed to be recorded. 
 
 ### Task 7: Story pitch (4 points)
 
@@ -166,7 +175,11 @@ Based on your probability analysis, write a headline and lede for a story about 
 
 Then write 2-3 sentences describing how you would use probability thinking to advance this story — what could you compare these probabilities to, and what additional analysis would help?
 
-ANSWER HERE
+headline: Most White House employees make between 60,000 to 90,000 dollars in annual salaries. 
+
+Lede: White House salaries were expected to have 10.2% of employees making below 60,000 dollars this year, but instead these expected staff members make up only 0.5% of total White House employees. 
+
+To further this story I would compare salaries of White House employees to those of other federal agencies. I want to compare and contrast whether the White House salaries are on par with other agencies salaries and if they are fair to the titles of these staff members. 
 
 ### Task 8: Save Your Work and Put it on GitHub
 
