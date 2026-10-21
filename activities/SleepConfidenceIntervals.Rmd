@@ -40,8 +40,7 @@ sleep_stats
 ```
 
 **Answer this question:** Based on these numbers alone, what would you tell the health reporter? Why might it be risky to report the average as the definitive answer for all students?
-
-ANSWER HERE
+The average number of hours that people are getting on campus is 7.7 hours a night which is the cdc's reccomended number of sleep. The standard deviation also shows us that the spread is not too crazy as it is only a difference of about 6 at -1 standard deviations away and 8 at postiive 1 standard deviations away. This means there are not drastic changes of 2 at -1 and 12 at 1 which means that the data is fairly standard. This does not factor in outliers. 
 
 ### Task 3: Calculate the standard error
 
@@ -58,7 +57,7 @@ sleep_stats
 
 **Answer this question:** The standard error is much smaller than the standard deviation. Why? What does each one measure?
 
-ANSWER HERE
+It is smaller since this is what we expect the mean to vary if we took another sample which means that if we took another sample of 37 then the mean would not change a drastic amount. This is because there is only really 1-12 hours that students can be sleeping and most try and get about 6-7 hours which leaves little room for drastic variation of horus slept. 
 
 ### Task 4: Calculate a 95% confidence interval
 
@@ -79,8 +78,7 @@ sleep_stats |>
 
 **Answer this question:** Write one sentence explaining what this confidence interval means in plain English that a reader would understand.
 
-ANSWER HERE
-
+This means that the true average hours that students at the University of Maryland sleep is between seven and eight hours. 
 ### Task 5: Visualize the distribution with the confidence interval
 
 This chart shows the histogram of individual sleep hours, plus the mean (red line) and the 95% confidence interval (blue shaded region). The shaded region is the range where we think the true average for all students falls.
@@ -112,7 +110,7 @@ ggplot(sleep_data, aes(x = hours)) +
 
 **Answer this question:** Look at the chart. Notice that the confidence interval is much narrower than the spread of individual data points. Why? What's the difference between the variation in individual sleep hours and the uncertainty about the average?
 
-ANSWER HERE
+While the data and number of hours may change the average most likely will not and will be around 7 each time as there are only so many hours of sleep students can be getting. The confidence interval is measuring the mean/average number of sleep that students are getting not the individual numebrs as there are outliers and it may depend on the student/the week. 
 
 ### Task 6: The CDC question — is 7 hours within the interval?
 
@@ -134,7 +132,7 @@ sleep_stats |>
   b) "Students May Not Be Getting Enough Sleep, Survey Suggests"
   c) "Survey: Students Getting Recommended Amount of Sleep"
 
-ANSWER HERE
+It is 7 therefore that means that students are getting an average of 7 hours, which is the recommended number of sleep that the CDC says. B is inaccurate as it says that students are not getting enough which they are getting enough since the CDC says 7 and we are getting 7. We also average 7.7 which is technically higher than 7 but is not enough to say that we are getting more "hours" which can be misleading.  
 
 ### Task 7: What about a bigger sample?
 
