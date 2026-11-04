@@ -92,11 +92,11 @@ ggplot(nonvoters_data, aes(x = weight)) +
 
 **Questions:**
 
-1. What is the range of weights in this dataset?
+1. What is the range of weights in this dataset? 0-4
 
-2. What does it mean when a respondent has a weight of 0.23? What about 3.04?
+2. What does it mean when a respondent has a weight of 0.23? What about 3.04? Those that respond more so than other have a lower weight while those who are less likely to respond have a higher weight. 
 
-3. Why might some respondents be weighted more heavily than others?
+3. Why might some respondents be weighted more heavily than others? Some may be weighted more heavily than others because they are less likely to respond in previous or similar polls/studies which shows that their voice has not been as thought of in regards to these quesitons. 
 
 # Exercise 1: Voter Categories and Weighting
 
@@ -231,8 +231,8 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 
 **Answer These Questions:**
 
-1. Which voter category shows the biggest difference between weighted and unweighted results?
+1. Which voter category shows the biggest difference between weighted and unweighted results? Those that rarely or never vote are underrepresented in this poll. 
 
-2. How might these differences affect reporting on likely voter turnout?
+2. How might these differences affect reporting on likely voter turnout? This will affect the reporting that we do about voter turnout because if those that are more likely to be underrepresented in our poll are mostly rarely or never  voters this skews how many people are actually going to vote. 
 
-3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample? This exists because people are less likely to tell you whether or not they will not be voting than if you are voting. Those who are not voting may have work, or not have transportation to get to the polls or just may have forgot so there are more factors that are stopping people from not voting than for those who are voting. And this also means that they are less likely to take surveys. 
