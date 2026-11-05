@@ -1,6 +1,6 @@
 ---
 title: "HW11: Effect Size"
-name: REPLACE WITH YOUR NAME
+name: Clare Roth
 ---
 
 ```{r setup, include=FALSE}
@@ -36,8 +36,8 @@ First, let's organize the data for both districts. Fill in the REPLACE_ME values
 
 ```{r}
 # District A data (you've seen this before!)
-district_a_prior_mean <- REPLACE_ME
-district_a_prior_sd <- REPLACE_ME
+district_a_prior_mean <- 72.6
+district_a_prior_sd <- 4.8
 
 district_a_scores <- c(74, 76, 73, 75, 78, 77, 74, 79, 75, 76, 77, 75)
 
@@ -67,7 +67,7 @@ district_a_stats
 ### Reflection Question 1:
 Looking at just the raw numbers, which district appears to have a larger improvement? District A improved from 72.6 to what average? District B improved from 72.6 to what average?
 
-ANSWER HERE
+Looking at the raw numbers district B seems like it is having larger improvement. District A improved to a new mean of 75.75 while District B improved to a new mean of 73.8. 
 
 
 ## Task 2: Run Hypothesis Tests for Both Districts (3 points)
@@ -92,7 +92,7 @@ Now let's calculate the t-statistic for District B. Since we only have summary s
 # District B: Manual t-test calculation
 # t = (sample_mean - population_mean) / (sample_sd / sqrt(n))
 
-district_b_t_stat <- (district_b_new_mean - district_b_prior_mean) / (district_b_new_sd / sqrt(REPLACE_ME))
+district_b_t_stat <- (district_b_new_mean - district_b_prior_mean) / (district_b_new_sd / sqrt(150))
 
 # Calculate p-value for one-sided test
 district_b_p_value <- pt(district_b_t_stat, df = district_b_n - 1, lower.tail = FALSE)
@@ -105,7 +105,7 @@ cat("p-value:", format(district_b_p_value, scientific = FALSE, digits = 6), "\n"
 ### Reflection Question 2:
 Based on the p-values alone, which district has stronger evidence of improvement? Which result would make a better headline if you only looked at statistical significance?
 
-ANSWER HERE
+District A had stronger evidence of improvement than B based strictly on their p-values. HL: District A's new reading program has a increases students reading scores. 
 
 
 ## Task 3: Calculate Effect Size Using Cohen's d (5 points)
@@ -128,7 +128,7 @@ district_a_cohens_d <- (district_a_stats$new_mean - district_a_prior_mean) / dis
 cat("District A Cohen's d:", round(district_a_cohens_d, 3), "\n")
 
 # Calculate Cohen's d for District B
-district_b_cohens_d <- (REPLACE_ME - REPLACE_ME) / district_b_prior_sd
+district_b_cohens_d <- (district_b_new_mean - district_b_prior_mean) / district_b_prior_sd
 
 cat("District B Cohen's d:", round(district_b_cohens_d, 3), "\n")
 ```
@@ -136,8 +136,7 @@ cat("District B Cohen's d:", round(district_b_cohens_d, 3), "\n")
 ### Reflection Question 3:
 Using the interpretation guidelines above (small ≈ 0.2, medium ≈ 0.5, large ≈ 0.8), how would you classify each district's effect size? Which program produced a larger practical effect?
 
-ANSWER HERE
-
+District A has a medium effect size while District B has a small effect size. This means that District A has a larger practical effect than District B when it comes to improvement in reading scores.
 
 ## Task 4: Visualize the Difference (3 points)
 
@@ -201,8 +200,7 @@ ggplot(comparison_data, aes(x = District, y = Improvement, fill = Effect_Categor
 ### Reflection Question 4:
 Look at the chart. District B has a *more* statistically significant result (lower p-value) but a *smaller* effect size. How is this possible? What role does sample size play?
 
-ANSWER HERE
-
+This is possible because it could be that the 12 in District A did significantly better/well than the total of 150 from District B but in reality  District B is more statistically significant because it has a greater more representative population than District A.  
 
 ## Task 5: The Journalism Problem (5 points)
 
@@ -235,17 +233,16 @@ story_summary
 You're writing a story comparing these two reading programs. Write two different headlines and ledes:
 
 **Version 1 - Focusing only on statistical significance:**
-Headline: 
-Lede: 
+Headline: School District A's reading program is less statistically significant as School District B's reading program. 
+Lede: Superintendent B said in a statement on Tuesday that after implementing their new reading program students scores were more statistically significant than School District A's. 
 
 **Version 2 - Incorporating effect size:**
-Headline: 
-Lede: 
+Headline: Superintendent A says students improved in reading scores after medium effect size reading program. 
+Lede: Superintendent B said in a statement on Tuesday that after implementing their new reading program students improved by an average of three points leading to a medium effect size. 
 
 Which version tells readers what they actually need to know? Why?
 
-ANSWER HERE
-
+The second version tells more of the complete story as it is more representative of the population as it has a greater sample size. 
 
 ## Task 6: Calculate Effect Size for a New Scenario (5 points)
 
@@ -260,9 +257,9 @@ Calculate the effect size and determine if the claim of "dramatic improvement" i
 # Calculate the statistics
 tutoring_prior_mean <- 68
 tutoring_prior_sd <- 12
-tutoring_new_mean <- REPLACE_ME
-tutoring_new_sd <- REPLACE_ME
-tutoring_n <- REPLACE_ME
+tutoring_new_mean <- 71
+tutoring_new_sd <- 11
+tutoring_n <- 45
 
 # Calculate Cohen's d
 tutoring_cohens_d <- (tutoring_new_mean - tutoring_prior_mean) / tutoring_prior_sd
@@ -288,7 +285,7 @@ cat("p-value:", round(tutoring_p_value, 4), "\n")
 ### Reflection Question 6:
 Is the tutoring company's claim of "dramatic improvement" justified? What questions would you ask the company's spokesperson? What would your headline be?
 
-ANSWER HERE
+No this is not justified as there is only a small effect category and the p-value is too high in comparison to 0.01 causing there to not be any significance.  I would ask the company what tactics they used to measure significance/overall performance. HL: Tutoring company states children who attend their program are getting smarter but is this true? 
 
 
 When finished, save your work and submit via GitHub.
