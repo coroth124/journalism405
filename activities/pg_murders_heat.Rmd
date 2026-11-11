@@ -14,7 +14,7 @@ library(tidyverse)
 ### Task 2: Load the dataset from [https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv](https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv)
 
 ```{r}
-pg_murders_heat <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv")
+pg_murders_heat <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv") 
 ```
 
 
@@ -43,6 +43,7 @@ pg_murders_heat |>
 
 pg_murders_heat |> 
   ggplot() +
+  geom_point(aes(x=temperature, y=murders, label=month)) +
   geom_text(aes(x=temperature, y=murders, label=month), size = 5) +
   geom_smooth(aes(x=temperature, y=murders, method="lm"))
 
@@ -50,7 +51,5 @@ pg_murders_heat |>
 
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
-
-The results of both the correlation calculation and the scatterplot show both increased temperatures and overall numbers of murders during May, June, July, August and September (with upper bounds of about 80 degrees and 45 murders) — and decreased temperatures and murders in November, Februrary, January and December (with lower bounds of around 35 degrees and 20 murders). The scatterplot illustrates somewhat of a steep dropoff between these two categories of months, relating to the conclusion that more murders occur during the summer months (when temperatures are high and it's more appealing for indivudals to be outside), while a decreased number of murders occur in relation to colder temperature-months (specifically in the winter season, when it's less appealing for individuals to go outside and less accessible for murders to take place). In short, there's definitely a moderate to strong correlation between overall temperatures and number of murders.
-
+The correlation coefficient is closer to one than it is to negative one which means that there is a stronger correlation between the rise of murders and the higher the temperature. This is also supported by the scatterplot as we can see in June, May and July that there are significantly more murders in these months which have higher temperatures as they are in the summer than in colder winter months such as January. This shows us that more murders happen over the summer because of these high temperatures.
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
