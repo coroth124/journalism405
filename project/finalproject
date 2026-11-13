@@ -1,0 +1,15 @@
+---
+title: "finalprojectdata"
+output: html_document
+---
+###Test we could run: 
+-I was thinking of grouping by make of car and then group by the year the cars were bought using the group_by and summarize functions and comparing the two by using a linear regression model. I want to compare from early 2024 to now, 2026 as Elon Musk began helping Trump campaign during that time. I would also want to do the same thing month by month to compare how each year purchases have changed. I would also like to showcase the number of Teslas purchased each year and the stock prices of Tesla's for that year through a separate linear regression model. 
+
+
+
+
+```{r}
+library(readr)
+washington_data <- read.csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/new_wa_ev_reg.csv")
+###This data contains electric car information for areas in Washington state including vin numbers, make, model, city it was registered in, EV type, EV range, legislative district, price sold, primary use, new or used, sale date, 2020 GEOID, hybrid vehicle registration, hybrid vehicle registration fee, transportation electric fee paid, EV fee paid, postal code, county, transaction type, odometer and EV "fuel" type. The data spans 2012 to 2026 at least of sale date. The most important columns will probably be the EV type, price sold, sale date, legislative districts, location, city, county, and year of car. These will help determine both the political implications of Tesla ownership during this span of time. The thing that is missing is the addition of Tesla stock data to showcase how they have been doing economically over this similar time span and to see if there is a correlation. I want to know more about if total EV sales stayed consistent over this time span and if Tesla's shares dropped or vice versa to understand if it is Tesla or EV sales in general that have caused an increase or decrease in those buying these vehicles. 
+```
