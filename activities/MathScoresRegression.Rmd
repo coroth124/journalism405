@@ -23,16 +23,16 @@ schools <- read_csv("https://raw.githubusercontent.com/dwillis/jour405_files/ref
 Before we visualize anything, let's look at what we're working with.
 
 ```{r}
-summary(schools$`FARMS Pct`)
+summary(schools$`FARMS Pct`) ###just for this one column
 
-schools |> arrange(desc(`FARMS Pct`)) |> head(10)
+schools |> arrange(desc(`FARMS Pct`)) |> head(10) ###10 schools with the largest % large gap between 53% and 100%
 
-schools |> arrange(`FARMS Pct`) |> head(10)
+schools |> arrange(`FARMS Pct`) |> head(10) ###10 schools with the lowest % of scores compact scores
 ```
 
 Look at the distribution of FARMS percentages. Do any values look unusual or suspicious? What might it mean if a school has a FARMS percentage of exactly 100? Write two or three sentences describing what you see and whether anything concerns you.
 
-ANSWER HERE
+The large jump between schools in the top 10 that have a FARMS percentage of 53% to the next school in the rankings which is 100% is very drastic. The data is definetly skewed. If a school has a FARMS percentage of 100 this means that 100% of the students in their schools are eligable for the free reduced lunch program. For the lowest 10 schools the data is quite compact with regards to FARMS percentages. The maximum is also singificantly higher than the 3rd quartile which shows us that the data between the two is very large in comparison to the steady increases we had been seeing from the data so far.
 
 
 ### Task 2: Create a Scatterplot and Describe the Results
@@ -50,7 +50,7 @@ schools |>
 
 Describe what you see. Is there a clear trend? Does the regression line look like it represents the data well, or does it seem to be pulled in an odd direction? Connect what you observed in Task 1 to what you see here.
 
-ANSWER HERE
+There are multiple outliers at the end of the data spread that are 100 with a large gap between about 50 or so percent and 100. There is not a clear trend of data as it is significantly scattered and less clustered. This regression line represents the drastic jump and pull between the other numbers and the high outliers of 100% but does not represent the 1-50% range of other data points as well because of this pull. 
 
 
 ### Task 3: Run the Regression Model
@@ -68,8 +68,7 @@ The **p-value** tells you whether the relationship is statistically significant.
 
 Report all three values and describe what they tell you. Does this model support the school board member's claim? Is this even a model worth using?
 
-ANSWER HERE
-
+The p-value is 0.1125 which is larger than 0.05 meaning this model does not produce statistically significant results. The Adjusted R-squared is 4% which shows us that the math percentage of the FARMS figure only actually accounts for 4% which is quite low. The Co-efficient is very very small at 0.12349 which shows us that if you raise the FARMS percentage by 1% the math percentage goes up by 0.1% so we need a big change to make only a little bit of change. 
 
 ### Task 4: What's Driving the Problem? Filter and Rerun.
 
@@ -98,8 +97,7 @@ cat("  Adjusted R-squared:", summary(model_filtered)$adj.r.squared, "\n")
 
 How did removing those schools change the model? Did the coefficient change direction? Did the p-value or R-squared improve meaningfully? What does this tell you about the influence of suspicious data values on a regression model?
 
-ANSWER HERE
-
+Removing the 100% schools does change the model and makes the data more concise rather than skewed. The p-value and R-squared did change but not significantly enough to make a drastic change in our analysis. This tells us that the influence of suspicious data values in a regression model does affect the regression model but doesn't change it enough to make our entire outlook on the data different.  
 
 ### Task 5: Even the Better Model Has Problems
 
@@ -132,8 +130,7 @@ head(schools_filtered |> select(1, `FARMS Pct`, `% Met or Exceeded Math Expectat
 
 What are the largest residuals? Given the model's weak R-squared, how much confidence would you have in labeling these schools as over- or under-performers? Why?
 
-ANSWER HERE
-
+The largest residuals are Woodland Elementary school and Crooked Billet Elementary School. Given there is a low R-squared this means that we would have low confidence in labeling these schools as over or under performers becasue this model fails to find most of the factors that drive student or school outcomes so the labels are unreliable.  
 
 ### Task 6: Write the Story Pitch
 
@@ -141,4 +138,5 @@ You've now run two models, examined the data quality and seen that even a cleane
 
 Write a short story pitch (3-5 sentences) that addresses the following: Does the data support or contradict the claim? What data quality issues did you find? What would you need - different data, a different model, additional reporting - before you could responsibly publish a story about this claim? Who would you call first?
 
-ANSWER HERE
+The data contradicts the claim that schools with fewer students on FARMS do better on standardized math tests. Instead, the data shows that these schools with more students on FARMS do better. Quality issues that were found from the data is that those schools that had 100% of students on FARMS programs are outliers because these programs could just be open to all students regardless of socioeconomic backgrounds skewing the data significantly. We would need more data and more information regarding how many of these students that participate in these FARMS programs are actually in need of these programs to determine tests scores alongside them. I would then call the principles of the schools to understand which schools gave out the programs and see whether they offer the FARMS programs to all students or just for students with lower socioeconomic status. 
+I would find the reported income from the tax database of students parents reported income determine which students who took the math tests are not in need of these programs to feed them.
