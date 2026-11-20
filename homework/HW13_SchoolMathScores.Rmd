@@ -84,20 +84,11 @@ For each of the two schools, answer:
 - What does the demographic and economic profile of the zip code look like?
 - Does anything in that profile help explain why the school is over- or under-performing the model?
 - What would your first reporting question be to the principal of that school?
+ Broad Acres Elementary: 
+ Has an economic profile of $29,849 per capita income and $80,768 median household income. The demographics are 34.3 in median age with 53% of the population being male and 53% being hispanic, 25% black, 10% asian, and 9% white. 15.8% in the zip code are below the poverty line. As there are more people of minority backgrounds in the zip code of the school and a majority of the kids are participate in the FARMS program it would make sense why this school is over-preforming. My first question to their principal of the school would be are you teaching math differently in order to beat the odds that poverty is causing kids to fail when this seems to be the opposite case for this school. 
 
-ANSWER HERE
-1:9.8
-2: 15.8%
-3: 8.3%
-4: 4.6%
-5: 12.6%
-6: 12.8%
-7: 5.7%
-8: 4%
-9: 7.2%  
-10: 7.4% 
-
-15% poverty thing for two of the schools 
+Stedwick Elementary
+Has an economic profile of $45,834 per capita income and $98,542 median household income. The demographics are 37.9 in median age with 50% of the population being male and 33% being hispanic, 23% black, 14% asian, and 23% white. 12.8% in the zip code are below the poverty line. As there are more people of minority backgrounds in the zip code of the school and but there are less kids in the FARMS program and more white kids than in the other school which makes sense why this school is under-preforming. My first question to their principal of the school would be what are we missing from the data with regards to students math performance as the odds that poverty is not harming kids math scores is quite wrong.
 
 
 ### Task 5: Evaluate the Model and Write the Pitch (7 points)
