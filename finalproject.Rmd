@@ -1,6 +1,7 @@
 ---
 title: "finalproject.Rmd"
 output: html_document
+Name: Clare Roth
 ---
 
 ```{r}
