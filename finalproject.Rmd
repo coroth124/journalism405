@@ -1,0 +1,99 @@
+---
+title: "finalproject.Rmd"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+ev_data <- read_csv(
+  "https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/new_wa_ev_reg.csv",
+  show_col_types = FALSE
+)
+```
+
+
+
+```{r}
+# Use sale date, rather than model year or registration year.
+ev_data <- ev_data |>
+  mutate(
+    sale_date = mdy(sale_date),
+    month = floor_date(sale_date, "month")
+  )
+
+# Check how many records cannot be assigned to a sale month.
+ev_data |>
+  summarise(
+    records = n(),
+    missing_sale_dates = sum(is.na(sale_date))
+  )
+```
+###
+This above, allows me to group my data dates by months to allow us to see the differences in sales of EV's from a month to month basis rather than year by year. The second piece of code showcases the number of records that cannot be assigned to a sale month which shows us that some of the electric vehicles sale dates in this data set are not accounted for which could mess with our end result. 
+
+```{r}
+# Adjust this cutoff when a more complete file becomes available.
+last_complete_month <- as.Date("2026-08-01")
+
+monthly_comparison <- ev_data |>
+  filter(
+    state == "WA",
+    new_or_used_vehicle == "New",
+    transaction_type == "Original Title",
+    clean_alternative_fuel_vehicle_type ==
+      "Battery Electric Vehicle (BEV)",
+    !is.na(sale_date),
+    !is.na(make),
+    month >= as.Date("2024-01-01"),
+    month <= last_complete_month
+  ) |>
+  group_by(month) |>
+  summarise(
+    tesla_count = sum(str_to_upper(make) == "TESLA"),
+    other_ev_count = sum(str_to_upper(make) != "TESLA"),
+    total_ev_count = n(),
+    tesla_share_pct = 100 * tesla_count / total_ev_count,
+    .groups = "drop"
+  ) |>
+  mutate(
+    sale_year = year(month),
+    month_number = month(month),
+    month_name = month(month, label = TRUE, abbr = TRUE)
+  )
+
+monthly_comparison |>
+  ggplot(aes(x = `month`, y = `tesla_share_pct`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Sale Month", y = "Tesla Market Share (%)",
+       title = "Tesla's Share of New BEV Transactions in Washington")
+```
+###
+This code above allows me to filter through my dataset and highlight only the real new EV sales that were made. By filtering the data like this I am able to make sure that no illegitimate data skews my end result and that the information is accurate. The next bit of code calculates Tesla's monthly market share from 2024 through August 2026 which allows me to isolate Tesla's EV brand out of all the others and see how they have performed as a company during this duration when Musk has been involved more so in politics. The final bit of code in this section is a scatter plot of a linear regression to showcase the possible correlation of the months when these EV's were sold and the percentage of Tesla's market share over time. Comparing these values is important to see if my hypothesis of the demand for Tesla's increased or not over time since Musk became involved in U.S. politics is true or not. 
+
+```{r}
+###DISCLAIMER THIS LINE CHART WAS ADDED THROUGH USE OF AI here is the link: https://gemini.google.com/app/949c27cf2cb35c39?is_sa=1&is_sa=1&android-min-version=301356232&ios-min-version=322.0&campaign_id=bkws&utm_source=sem&utm_medium=paid-media&utm_campaign=bkws&pt=9008&mt=8&ct=p-growth-sem-bkws&gclsrc=aw.ds&gad_source=1&gad_campaignid=20108148196&gbraid=0AAAAApk5Bhl_9NiWobFPe_NncPOd4HyMx&gclid=Cj0KCQiAiJXYBhD_ARIsAAx2AHnQF1dtVWquDincWsbfQ8IQ-nrA2vlZwptXi4gg1xp_o82ToL-y_uYaAnE8EALw_wcB&pli=1 
+ggplot(
+  monthly_comparison,
+  aes(
+    x = month_name,
+    y = tesla_share_pct,
+    color = factor(sale_year),
+    group = sale_year
+  )
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Tesla's Share of New BEV Sales by Month (2024–2026)",
+    x = "Month",
+    y = "Tesla Market Share (%)",
+    color = "Year"
+  ) +
+  theme_minimal()
+```
+###
+The code above highlights two different graphs to compare the same months over the past few years and Tesla's market share percentage between 2024 and 2026.Comparing years allows me to see the differences a bit more clearly and if there has been any drastic changes over that time frame.  
+
